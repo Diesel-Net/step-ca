@@ -1,0 +1,16 @@
+step_ca_version: 0.15.4
+step_cli_version: 0.15.2
+
+step_ca_url:
+  "https://github.com/\
+  smallstep/certificates/\
+  releases/download/\
+  v{{ step_ca_version }}/\
+  step-certificates_{{ step_ca_version }}_amd64.deb"
+
+step_cli_url:
+  "https://github.com/\
+  smallstep/cli/\
+  releases/\download/\
+  v{{ step_cli_version }}/\
+  step-cli_{{ step_cli_version }}_amd64.deb"
