@@ -3,7 +3,12 @@
 - hosts: all
   tasks:
 
-    - name: The first task...
-      shell: echo 'hello world'
+    - name: Download step-ca {{ step_ca_version }}
+      get_url:
+        url: https://github.com/smallstep/certificates/releases/download/v{{ step_ca_version }}/step-certificates_{{ step_ca_version }}_amd64.deb
+        dest: ~/step-certificates_{{ step_ca_version }}_amd64.deb
 
-    #- name: placeholder
+    - name: Download step-cli {{ step_cli_version }}
+      get_url:
+        url: https://github.com/smallstep/cli/releases/download/v{{ step_cli_version }}/step-cli_{{ step_cli_version }}_amd64.deb
+        dest: ~/step-cli_{{ step_cli_version }}_amd64.deb
