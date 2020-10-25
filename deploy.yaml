@@ -1,0 +1,9 @@
+# ansible-playbook deploy.yaml -i inventories/dev/hosts --vault-id ~/.tokens/master_id
+
+- hosts: all
+  tasks:
+
+    - name: The first task...
+      shell: echo 'hello world'
+
+    #- name: placeholder

@@ -1,0 +1,8 @@
+codename: acme-ca
+user: automation
+home: "/home/{{ user }}"
+app_data: "{{ home }}/.diesel"
+
+hostname: "tools"
+domain: diesel.net
+fqdn: "{{ hostname }}.{{ domain }}"
