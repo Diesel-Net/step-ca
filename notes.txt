@@ -1,0 +1,57 @@
+step_certificates_version: 0.15.4
+step_cli_version: 0.15.2
+
+
+wget https://github.com/smallstep/certificates/releases/download/v0.15.4/step-certificates_0.15.4_amd64.deb
+
+wget https://github.com/smallstep/cli/releases/download/v0.15.2/step-cli_0.15.2_amd64.deb
+
+
+sudo dpkg -i step-certificates_0.15.4_amd64.deb
+sudo dpkg -i step-cli_0.15.2_amd64.deb
+
+# put step-ca.service at /etc/systemd/system/step-ca.service
+
+# the -m flag creates home directory /home/step
+sudo useradd -m -s /bin/bash step
+sudo passwd -l step
+sudo chown -R step:step /home/step
+sudo mkdir -p /var/log/step-ca
+sudo chown -R step:step /var/log/step-ca
+
+# copy over ca.json, default.json...etc.. or run this command
+`step ca init`
+
+# save the password at /home/step/.step/pwd
+chmod 400 /home/step/.step/pwd
+
+# allow the service to bind to low-level ports (443)
+# ISSUE: This seems to reset on every server reboot!
+sudo setcap CAP_NET_BIND_SERVICE=+eip /usr/bin/step-ca
+
+sudo systemctl start step-ca
+sudo systemctl enable step-ca
+
+
+#### BOOTSTRAPPING ####
+https://manuals.gfi.com/en/kerio/connect/content/server-configuration/ssl-certificates/adding-trusted-root-certificates-to-the-server-1605.html
+
+Ubuntu:
+    Add:
+        cp diesel_root_ca.crt /usr/local/share/ca-certificates/diesel_root_ca.crt
+        sudo update-ca-certificates
+    Remove:
+        rm /usr/local/share/ca-certificates/diesel_root_ca.crt
+        sudo update-ca-certificates
+
+Windows (as administrator):
+    Add:
+        certutil -addstore -f "ROOT" diesel_root_ca.crt
+    Remove:
+        certutil -delstore "ROOT" "Diesel Root CA"
+
+
+#### TESTING ####
+Ubuntu:
+    sudo apt install certbot
+    sudo certbot certonly --standalone -d mineos.diesel.net --server https://ca.diesel.net/acme/acme/directory

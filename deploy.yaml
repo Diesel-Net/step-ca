@@ -3,12 +3,13 @@
 - hosts: all
   tasks:
 
+    # TODO: Docker instead?
     - name: Download step-ca {{ step_ca_version }}
       get_url:
-        url: https://github.com/smallstep/certificates/releases/download/v{{ step_ca_version }}/step-certificates_{{ step_ca_version }}_amd64.deb
+        url: "{{ step_ca_url }}"
         dest: ~/step-certificates_{{ step_ca_version }}_amd64.deb
 
     - name: Download step-cli {{ step_cli_version }}
       get_url:
-        url: https://github.com/smallstep/cli/releases/download/v{{ step_cli_version }}/step-cli_{{ step_cli_version }}_amd64.deb
+        url: "{{ step_cli_url }}"
         dest: ~/step-cli_{{ step_cli_version }}_amd64.deb
