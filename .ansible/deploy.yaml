@@ -1,0 +1,32 @@
+# ansible-playbook deploy.yaml -i inventories/dev/hosts --vault-id ~/.tokens/master_id
+
+- hosts: all
+  roles:
+    - common
+
+  tasks:
+
+    - include_role:
+        name: common
+        tasks_from: make_config_dir
+
+    - include_role:
+        name: common
+        tasks_from: make_data_dir
+
+    - name: 'Render ca.json.j2 to {{ config_dir }}/ca.json'
+
+    - include_role:
+        name: docker
+        tasks_from: stack_deploy
+
+    # # TODO: Docker instead?
+    # - name: Download step-ca {{ step_ca_version }}
+    #   get_url:
+    #     url: "{{ step_ca_url }}"
+    #     dest: ~/step-certificates_{{ step_ca_version }}_amd64.deb
+
+    # - name: Download step-cli {{ step_cli_version }}
+    #   get_url:
+    #     url: "{{ step_cli_url }}"
+    #     dest: ~/step-cli_{{ step_cli_version }}_amd64.deb
