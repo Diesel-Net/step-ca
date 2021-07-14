@@ -14,11 +14,13 @@
       file:
         state: directory
         path: '{{ config_dir }}/config'
+        mode: 'u=rwx,g=rwx=,o=rwx'
 
     - name: 'Ensure {{ config_dir }}/secrets/ exists'
       file:
         state: directory
         path: '{{ config_dir }}/secrets'
+        mode: 'u=rwx,g=rwx=,o=rwx'
 
     - name: 'Render password.j2 to {{ config_dir }}/secrets/password'
       template:
