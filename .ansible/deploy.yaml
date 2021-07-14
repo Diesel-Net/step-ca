@@ -28,9 +28,33 @@
         path: '{{ config_dir }}/secrets'
         mode: 'u=rwx,g=rwx=,o=rwx'
 
-    - name: 'Render password.j2 to {{ config_dir }}/secrets/password'
+    - name: 'Ensure {{ config_dir }}/certs/ exists'
+      file:
+        state: directory
+        path: '{{ config_dir }}/certs'
+        mode: 'u=rwx,g=rwx=,o=rwx'
+
+    - name: Render public certificates
+      copy:
+        content: '{{ item.crt }}'
+        dest: '{{ config_dir }}/certs/{{ item.name }}.crt'
+      with_items: '{{ certs }}'
+      loop_control:
+        label: '{{ config_dir }}/certs/{{ item.name }}.crt'
+      when: certs is defined
+
+    - name: Render private keys
+      copy:
+        content: '{{ item.key }}'
+        dest: '{{ config_dir }}/secrets/{{ item.name }}_key'
+      with_items: '{{ certs }}'
+      loop_control:
+        label: '{{ config_dir }}/secrets/{{ item.name }}_key'
+      when: certs is defined
+
+    - name: 'Render password to {{ config_dir }}/secrets/password'
       template:
-        src: password.j2
+        content: '{{ password }}'
         dest: '{{ config_dir }}/secrets/password'
 
     - name: 'Render ca.json.j2 to {{ config_dir }}/config/ca.json'
