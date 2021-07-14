@@ -15,7 +15,7 @@ services:
       labels:
         - traefik.enable=true
         - traefik.http.services.{{ git_repository }}.loadbalancer.server.scheme=https
-        - traefik.http.services.{{ git_repository }}.loadbalancer.server.port=9000
+        - traefik.http.services.{{ git_repository }}.loadbalancer.server.port=443
         - traefik.http.routers.{{ git_repository }}.rule=Host(`{{ domain }}`)
 
 networks:
