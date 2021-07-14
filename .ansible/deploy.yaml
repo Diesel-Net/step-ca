@@ -10,6 +10,11 @@
         name: common
         tasks_from: make_config_dir
 
+    - name: 'Ensure {{ config_dir }}/config/ exists'
+      file:
+        state: directory
+        path: '{{ config_dir }}/config'
+
     - name: 'Render ca.json.j2 to {{ config_dir }}/config/ca.json'
       template:
         src: ca.json.j2
