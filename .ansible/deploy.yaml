@@ -15,6 +15,16 @@
         state: directory
         path: '{{ config_dir }}/config'
 
+    - name: 'Ensure {{ config_dir }}/secrets/ exists'
+      file:
+        state: directory
+        path: '{{ config_dir }}/secrets'
+
+    - name: 'Render password.j2 to {{ config_dir }}/secrets/password'
+      template:
+        src: password.j2
+        dest: '{{ config_dir }}/secrets/password'
+
     - name: 'Render ca.json.j2 to {{ config_dir }}/config/ca.json'
       template:
         src: ca.json.j2
