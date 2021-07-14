@@ -16,6 +16,12 @@
         path: '{{ config_dir }}/config'
         mode: 'u=rwx,g=rwx=,o=rwx'
 
+    - name: 'Ensure {{ config_dir }}/db/ exists'
+      file:
+        state: directory
+        path: '{{ config_dir }}/db'
+        mode: 'u=rwx,g=rwx=,o=rwx'
+
     - name: 'Ensure {{ config_dir }}/secrets/ exists'
       file:
         state: directory
