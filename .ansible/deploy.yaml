@@ -10,15 +10,15 @@
         name: common
         tasks_from: make_config_dir
 
-    - name: 'Render ca.json.j2 to {{ app_dir }}/config/ca.json'
+    - name: 'Render ca.json.j2 to {{ config_dir }}/config/ca.json'
       template:
         src: ca.json.j2
-        dest: '{{ app_dir }}/config/ca.json'
+        dest: '{{ config_dir }}/config/ca.json'
 
-    - name: 'Render defaults.json.j2 to {{ app_dir }}/config/defaults.json'
+    - name: 'Render defaults.json.j2 to {{ config_dir }}/config/defaults.json'
       template:
         src: defaults.json.j2
-        dest: '{{ app_dir }}/config/defaults.json'
+        dest: '{{ config_dir }}/config/defaults.json'
 
     - include_role:
         name: docker
