@@ -7,7 +7,7 @@ services:
     image: smallstep/step-ca:0.15.4
     volumes:
       - /etc/localtime:/etc/localtime
-      - {{ ssl_cert_dir }}:/etc/ssl/certs/
+      - {{ ssl_cert_dir }}/:/etc/ssl/certs/
       - {{ app_dir }}/config/:/home/step/
     networks:
       - {{ docker_network }}

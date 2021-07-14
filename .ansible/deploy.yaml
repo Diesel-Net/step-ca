@@ -10,27 +10,16 @@
         name: common
         tasks_from: make_config_dir
 
-    # - name: 'Render ca.json.j2 to {{ app_dir }}/config/ca.json'
-    #   template:
-    #     src: ca.json.j2
-    #     dest: '{{ app_dir }}/config/ca.json'
+    - name: 'Render ca.json.j2 to {{ app_dir }}/config/ca.json'
+      template:
+        src: ca.json.j2
+        dest: '{{ app_dir }}/config/ca.json'
 
-    # - name: 'Render defaults.json.j2 to {{ app_dir }}/config/defaults.json'
-    #   template:
-    #     src: defaults.json.j2
-    #     dest: '{{ app_dir }}/config/defaults.json'
+    - name: 'Render defaults.json.j2 to {{ app_dir }}/config/defaults.json'
+      template:
+        src: defaults.json.j2
+        dest: '{{ app_dir }}/config/defaults.json'
 
     - include_role:
         name: docker
         tasks_from: stack_deploy
-
-    # # TODO: Docker instead?
-    # - name: Download step-ca {{ step_ca_version }}
-    #   get_url:
-    #     url: "{{ step_ca_url }}"
-    #     dest: ~/step-certificates_{{ step_ca_version }}_amd64.deb
-
-    # - name: Download step-cli {{ step_cli_version }}
-    #   get_url:
-    #     url: "{{ step_cli_url }}"
-    #     dest: ~/step-cli_{{ step_cli_version }}_amd64.deb
