@@ -53,7 +53,7 @@
       when: certs is defined
 
     - name: 'Render password to {{ config_dir }}/secrets/password'
-      template:
+      copy:
         content: '{{ password }}'
         dest: '{{ config_dir }}/secrets/password'
 
