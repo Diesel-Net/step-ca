@@ -8,7 +8,7 @@
 
     - include_role:
         name: common
-        tasks_from: make_app_dir
+        tasks_from: make_config_dir
 
     # - name: 'Render ca.json.j2 to {{ app_dir }}/config/ca.json'
     #   template:
@@ -19,7 +19,7 @@
     #   template:
     #     src: defaults.json.j2
     #     dest: '{{ app_dir }}/config/defaults.json'
-    
+
     - include_role:
         name: docker
         tasks_from: stack_deploy
