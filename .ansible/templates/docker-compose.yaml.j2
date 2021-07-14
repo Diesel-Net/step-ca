@@ -21,7 +21,7 @@ services:
         - traefik.http.services.{{ git_repository }}.loadbalancer.server.scheme=https
         - traefik.http.services.{{ git_repository }}.loadbalancer.server.port=443
 
-        - traefik.http.routers.{{ git_repository }}.service={{ git_repository }}@docker
+        - traefik.tcp.routers.{{ git_repository }}.service={{ git_repository }}@docker
 networks:
   {{ docker_network }}:
     external:
