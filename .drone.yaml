@@ -1,7 +1,7 @@
 ---
 kind: pipeline
 type: docker
-name: main deployment pipeline
+name: Install Step CA Server
 
 clone:
   depth: 1
@@ -23,7 +23,7 @@ steps:
 
 trigger:
   branch:
-    - stable
+    - development
   event:
     - push
 ...

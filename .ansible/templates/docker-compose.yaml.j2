@@ -4,37 +4,20 @@ version: '3.8'
 services: 
 
   agent:
-    image: portainer/agent:2.6.0
+    image: smallstep/step-ca:0.15.4
     volumes:
-      - {{ docker_socket }}:/var/run/docker.sock
-      - {{ docker_volumes }}:/var/lib/docker/volumes
+      - /etc/localtime:/etc/localtime
+      - /etc/ssl/certs/:/etc/ssl/certs/
+      - {{ app_dir }}/:/home/step
     networks:
       - {{ docker_network }}
     deploy:
-      mode: global
-      placement:
-        constraints: [node.platform.os == linux]
-
-  main:
-    image: portainer/portainer-ce:2.6.0
-    command: >
-      --admin-password {{ portainer_admin_password | replace('$', '$$') }} 
-      -H tcp://tasks.agent:9001 
-      --tlsskipverify 
-    volumes:
-      - {{ data_dir }}/:/data/
-    networks:
-      - {{ docker_network }}
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role == manager]
       labels:
         - traefik.enable=true
-        - traefik.http.services.{{ proxy_router_main }}.loadbalancer.server.port=9000
-        - traefik.http.routers.{{ proxy_router_main }}.rule=Host(`{{ domain }}`)
-        - traefik.http.routers.{{ proxy_router_main }}.tls.certresolver=step-ca
+        - traefik.http.services.{{ git_repository }}.loadbalancer.server.scheme=https
+        - traefik.http.services.{{ git_repository }}.loadbalancer.server.port=9000
+        - traefik.http.routers.{{ git_repository }}.rule=Host(`{{ domain }}`)
+
 networks:
   {{ docker_network }}:
     external:
