@@ -4,7 +4,7 @@
 Private (internal) ACME-based Certificate Authority on docker swarm. Using [Smallstep's step-ca](https://smallstep.com/docs/step-ca).
 
 ## Dependencies
-- Ansible 2.11+
+- Tested with ansible-core 2.11.2
 
 ## Installing Dependencies
 ```bash
