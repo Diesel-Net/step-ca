@@ -23,7 +23,7 @@ steps:
 
 trigger:
   branch:
-    - stable
+    - development
   event:
     - push
 ...
