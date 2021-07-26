@@ -1,7 +1,7 @@
 [![Build Status](https://drone.kiwi-labs.net/api/badges/Diesel-Net/step-ca/status.svg)](https://drone.kiwi-labs.net/Diesel-Net/step-ca)
 
 # step-ca
-Automated deployments of a Private (internal) ACME-based Certificate Authority. Using Step-CA.
+Private (internal) ACME-based Certificate Authority on docker swarm. Using [Smallstep's step-ca](https://smallstep.com/docs/step-ca).
 
 ## Dependencies
 - Tested with ansible-core 2.11.2
