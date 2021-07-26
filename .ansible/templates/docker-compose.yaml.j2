@@ -11,6 +11,8 @@ services:
       - {{ config_dir }}/:/home/step/
     networks:
       - {{ docker_network }}
+    environment:
+      STEPDEBUG=1 # enables more verbose debug output
     deploy:
       labels:
         - traefik.enable=true
