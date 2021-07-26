@@ -12,7 +12,7 @@ services:
     networks:
       - {{ docker_network }}
     environment:
-      STEPDEBUG=1 # enables more verbose debug output
+      - STEPDEBUG=1 # enables more verbose debug output
     deploy:
       labels:
         - traefik.enable=true
