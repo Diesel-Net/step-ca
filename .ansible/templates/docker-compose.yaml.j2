@@ -4,7 +4,7 @@ version: '3.8'
 services: 
 
   server:
-    image: smallstep/step-ca:0.15.4
+    image: smallstep/step-ca:0.15.5
     volumes:
       - /etc/localtime:/etc/localtime
       - {{ ssl_cert_dir }}/:/etc/ssl/certs/
