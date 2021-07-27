@@ -11,10 +11,8 @@ services:
       - {{ config_dir }}/:/home/step/
     networks:
       - {{ docker_network }}
-    extra_hosts:
-      - ldap.diesel.net:192.168.50.21
     #environment:
-      #- STEPDEBUG=1 # enables more verbose debug output
+      #- STEPDEBUG=1
     deploy:
       labels:
         - traefik.enable=true
