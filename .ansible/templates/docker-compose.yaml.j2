@@ -11,10 +11,6 @@ services:
       - {{ config_dir }}/:/home/step/
     networks:
       - {{ docker_network }}
-    dns:
-      - 192.168.50.1
-    dns_search:
-      - ldap.diesel.net
     extra_hosts:
       - ldap.diesel.net:192.168.50.21
     #environment:
