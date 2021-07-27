@@ -15,6 +15,8 @@ services:
       - 192.168.50.1
     dns_search:
       - ldap.diesel.net
+    extra_hosts:
+      - ldap.diesel.net:192.168.50.1
     #environment:
       #- STEPDEBUG=1 # enables more verbose debug output
     deploy:
