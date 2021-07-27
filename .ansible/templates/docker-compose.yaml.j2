@@ -11,6 +11,8 @@ services:
       - {{ config_dir }}/:/home/step/
     networks:
       - {{ docker_network }}
+    dns:
+      - 192.168.50.1
     #environment:
       #- STEPDEBUG=1 # enables more verbose debug output
     deploy:
