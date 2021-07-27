@@ -13,6 +13,8 @@ services:
       - {{ docker_network }}
     dns:
       - 192.168.50.1
+    dns_searchA:
+      - ldap.diesel.net
     #environment:
       #- STEPDEBUG=1 # enables more verbose debug output
     deploy:
