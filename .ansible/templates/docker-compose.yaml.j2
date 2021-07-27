@@ -11,7 +11,7 @@ services:
       - {{ config_dir }}/:/home/step/
     networks:
       - {{ docker_network }}
-    environment:
+    #environment:
       #- STEPDEBUG=1 # enables more verbose debug output
     deploy:
       labels:
