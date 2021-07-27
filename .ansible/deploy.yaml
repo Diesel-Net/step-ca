@@ -14,30 +14,37 @@
       file:
         state: directory
         path: '{{ config_dir }}/config'
-        mode: 'u=rwx,g=rwx=,o=rwx'
+        mode: 'u=rwx,g=rwx,o=rwx'
 
     - name: 'Ensure {{ config_dir }}/db/ exists'
       file:
         state: directory
         path: '{{ config_dir }}/db'
-        mode: 'u=rwx,g=rwx=,o=rwx'
+        mode: 'u=rwx,g=rwx,o=rwx'
 
     - name: 'Ensure {{ config_dir }}/secrets/ exists'
       file:
         state: directory
         path: '{{ config_dir }}/secrets'
-        mode: 'u=rwx,g=rwx=,o=rwx'
+        mode: 'u=rwx,g=rwx,o=rwx'
+
+    - name: 'Ensure {{ config_dir }}/templates/ exists'
+      file:
+        state: directory
+        path: '{{ config_dir }}/templates'
+        mode: 'u=rwx,g=rwx,o=rwx'
 
     - name: 'Ensure {{ config_dir }}/certs/ exists'
       file:
         state: directory
         path: '{{ config_dir }}/certs'
-        mode: 'u=rwx,g=rwx=,o=rwx'
+        mode: 'u=rwx,g=rwx,o=rwx'
 
     - name: Render public certificates
       copy:
         content: '{{ item.crt }}'
         dest: '{{ config_dir }}/certs/{{ item.name }}.crt'
+        mode: 'u=rwx,g=rwx,o=rwx'
       with_items: '{{ certs }}'
       loop_control:
         label: '{{ config_dir }}/certs/{{ item.name }}.crt'
@@ -47,6 +54,7 @@
       copy:
         content: '{{ item.key }}'
         dest: '{{ config_dir }}/secrets/{{ item.name }}_key'
+        mode: 'u=rwx,g=rwx,o=rwx'
       with_items: '{{ certs }}'
       loop_control:
         label: '{{ config_dir }}/secrets/{{ item.name }}_key'
@@ -56,16 +64,19 @@
       copy:
         content: '{{ password }}'
         dest: '{{ config_dir }}/secrets/password'
+        mode: 'u=rwx,g=rwx,o=rwx'
 
     - name: 'Render ca.json.j2 to {{ config_dir }}/config/ca.json'
       template:
         src: ca.json.j2
         dest: '{{ config_dir }}/config/ca.json'
+        mode: 'u=rwx,g=rwx,o=rwx'
 
     - name: 'Render defaults.json.j2 to {{ config_dir }}/config/defaults.json'
       template:
         src: defaults.json.j2
         dest: '{{ config_dir }}/config/defaults.json'
+        mode: 'u=rwx,g=rwx,o=rwx'
 
     - include_role:
         name: docker

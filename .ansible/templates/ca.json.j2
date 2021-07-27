@@ -4,8 +4,11 @@
     "crt": "/home/step/certs/intermediate_ca.crt",
     "key": "/home/step/secrets/intermediate_ca_key",
     "address": ":443",
+    "insecureAddress": "",
     "dnsNames": [
-        "{{ domain }}"
+        "{{ domain }}",
+        "localhost",
+        "127.0.0.1"
     ],
     "logger": {
         "format": "text"
@@ -47,7 +50,7 @@
             "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256"
         ],
         "minVersion": 1.2,
-        "maxVersion": 1.2,
+        "maxVersion": 1.3,
         "renegotiation": false
     }
 }
