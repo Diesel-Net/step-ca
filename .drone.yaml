@@ -14,12 +14,13 @@ steps:
       ANSIBLE_CONFIG: .ansible/ansible.cfg
     settings:
       galaxy: .ansible/roles/requirements.yaml
-      inventory: .ansible/inventories/production/hosts
+      inventory: .ansible/inventories/production
       playbook: .ansible/deploy.yaml
       private_key:
         from_secret: automation_id_rsa
       vault_password:
         from_secret: ansible_vault_password 
+      extra_vars: version=production
 
 trigger:
   branch:
