@@ -1,26 +1,28 @@
 ---
 kind: pipeline
 type: docker
-name: Install Step CA Server
+name: Install Step CA Server (prod)
 
 clone:
   depth: 1
 
+concurrency:
+  limit: 1
+
 steps:
 
   - name: deploy
-    image: plugins/ansible:3
+    image: docker.nexus.diesel.net/drone-ansible:2.13
     environment:
       ANSIBLE_CONFIG: .ansible/ansible.cfg
     settings:
       galaxy: .ansible/roles/requirements.yaml
-      inventory: .ansible/inventories/production
+      inventory: .ansible/inventories/prod
       playbook: .ansible/deploy.yaml
       private_key:
         from_secret: automation_id_rsa
       vault_password:
         from_secret: ansible_vault_password 
-      extra_vars: version=production
 
 trigger:
   branch:

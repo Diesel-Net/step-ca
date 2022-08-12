@@ -7,10 +7,10 @@ services:
     image: smallstep/step-ca:0.16.0
     volumes:
       - /etc/localtime:/etc/localtime
-      - {{ ssl_cert_dir }}/:/etc/ssl/certs/
+      - /etc/ssl/certs/:/etc/ssl/certs/
       - {{ config_dir }}/:/home/step/
     networks:
-      - {{ docker_network }}
+      - {{ traefik_network }}
     #environment:
       #- STEPDEBUG=1
     deploy:
@@ -20,6 +20,6 @@ services:
         - traefik.tcp.routers.{{ git_repository }}.rule=HostSNI(`{{ domain }}`)
         - traefik.tcp.routers.{{ git_repository }}.tls.passthrough=true
 networks:
-  {{ docker_network }}:
+  {{ traefik_network }}:
     external:
-      name: {{ docker_network }}
+      name: {{ traefik_network }}
