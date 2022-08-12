@@ -13,8 +13,6 @@ steps:
 
   - name: deploy
     image: docker.nexus.diesel.net/drone-ansible:2.13
-    environment:
-      ANSIBLE_CONFIG: .ansible/ansible.cfg
     settings:
       galaxy: .ansible/roles/requirements.yaml
       inventory: .ansible/inventories/prod
