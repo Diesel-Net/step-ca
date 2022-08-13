@@ -1,2 +1,4 @@
 .ansible/roles/common
+.ansible/roles/application
+.ansible/roles/traefik
 .ansible/roles/docker

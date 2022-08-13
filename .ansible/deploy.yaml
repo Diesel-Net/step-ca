@@ -1,13 +1,12 @@
-# ansible-playbook deploy.yaml -i inventories/dev/hosts --vault-id ~/.tokens/master_id
-
 - hosts: all
   roles:
-    - common
+    - application
+    - traefik
 
   tasks:
 
     - include_role:
-        name: common
+        name: application
         tasks_from: make_config_dir
 
     - name: 'Ensure {{ config_dir }}/config/ exists'
@@ -66,15 +65,15 @@
         dest: '{{ config_dir }}/secrets/password'
         mode: 'u=rwx,g=rwx,o=rwx'
 
-    - name: 'Render ca.json.j2 to {{ config_dir }}/config/ca.json'
+    - name: 'Render ca.json to {{ config_dir }}/config/ca.json'
       template:
-        src: ca.json.j2
+        src: ca.json
         dest: '{{ config_dir }}/config/ca.json'
         mode: 'u=rwx,g=rwx,o=rwx'
 
-    - name: 'Render defaults.json.j2 to {{ config_dir }}/config/defaults.json'
+    - name: 'Render defaults.json to {{ config_dir }}/config/defaults.json'
       template:
-        src: defaults.json.j2
+        src: defaults.json
         dest: '{{ config_dir }}/config/defaults.json'
         mode: 'u=rwx,g=rwx,o=rwx'
 
