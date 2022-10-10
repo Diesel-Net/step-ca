@@ -1,6 +1,6 @@
 {
     "root": "/home/step/certs/root_ca.crt",
-    "federatedRoots": [],
+    "federatedRoots": null,
     "crt": "/home/step/certs/intermediate_ca.crt",
     "key": "/home/step/secrets/intermediate_ca_key",
     "address": ":443",
@@ -14,7 +14,7 @@
         "format": "text"
     },
     "db": {
-        "type": "badger",
+        "type": "badgerv2",
         "dataSource": "/home/step/db",
         "badgerFileLoadingMode": ""
     },
