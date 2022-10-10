@@ -4,15 +4,15 @@ version: '3.8'
 services: 
 
   server:
-    image: smallstep/step-ca:0.16.0
+    image: smallstep/step-ca:0.17.0
     volumes:
       - /etc/localtime:/etc/localtime
       - /etc/ssl/certs/:/etc/ssl/certs/
       - {{ config_dir }}/:/home/step/
     networks:
       - {{ traefik_network }}
-    #environment:
-      #- STEPDEBUG=1
+    environment:
+      - STEPDEBUG=1
     deploy:
       labels:
         - traefik.enable=true
