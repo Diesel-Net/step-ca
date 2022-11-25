@@ -4,21 +4,21 @@ version: '3.8'
 services: 
 
   server:
-    image: smallstep/step-ca:0.16.0
+    image: smallstep/step-ca:0.23.0
     volumes:
       - /etc/localtime:/etc/localtime
-      - /etc/ssl/certs/:/etc/ssl/certs/
+      - /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt
       - {{ config_dir }}/:/home/step/
     networks:
       - {{ traefik_network }}
-    #environment:
-      #- STEPDEBUG=1
+    environment:
+      - STEPDEBUG=1
     deploy:
       labels:
         - traefik.enable=true
-        - traefik.tcp.services.{{ git_repository }}.loadbalancer.server.port=443
-        - traefik.tcp.routers.{{ git_repository }}.rule=HostSNI(`{{ domain }}`)
-        - traefik.tcp.routers.{{ git_repository }}.tls.passthrough=true
+        - traefik.tcp.services.{{ repository }}.loadbalancer.server.port=443
+        - traefik.tcp.routers.{{ repository }}.rule=HostSNI(`{{ domain }}`)
+        - traefik.tcp.routers.{{ repository }}.tls.passthrough=true
 networks:
   {{ traefik_network }}:
     external:
