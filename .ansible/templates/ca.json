@@ -39,7 +39,8 @@
                 "name": "acme",
                 "claims": {
                     "minTLSCertDuration": "5m",
-                    "maxTLSCertDuration": "10m",
+                    "maxTLSCertDuration": "5m",
+                    "defaultTLSCertDuration": "5m",
                     "enableSSHCA": true,
                     "disableRenewal": false,
                     "allowRenewalAfterExpiry": false
